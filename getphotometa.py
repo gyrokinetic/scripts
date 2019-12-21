@@ -8,6 +8,7 @@ class Photometa:
       self.fname = fname
       self.lon = 99999.
       self.lat = 99999.
+      self.created = '1900-01-01 00:00:00'
       self.lon_ref = 'F'
       self.lat_ref = 'F'
 
@@ -19,6 +20,9 @@ class Photometa:
          for key, value in img_exif.items():
             name = TAGS.get(key, key)
             img_exif[name] = img_exif.pop(key)
+            if(name == 'DateTimeOriginal'):
+                self.created = str(value.replace(":", "-", 2))
+            #print(name, value)
    
          if "GPSInfo" in img_exif:
             for key in img_exif['GPSInfo'].keys():
@@ -62,6 +66,7 @@ class Photometa:
       return deg + min + sec
 
    def PrintMeta(self):
+      print("time=", self.created)
       print("lat=", self.lat, self.lat_ref)
       print("lon=", self.lon, self.lon_ref)
 
@@ -73,8 +78,3 @@ else:
 photo = Photometa(fname)
 
 photo.PrintMeta()
-
-if(photo.lat_ref == 'N'):
-   print("North")
-else:
-   print("South")
