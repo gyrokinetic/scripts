@@ -66,9 +66,10 @@ class Photometa:
       return deg + min + sec
 
    def PrintMeta(self):
-      print("time=", self.created)
-      print("lat=", self.lat, self.lat_ref)
-      print("lon=", self.lon, self.lon_ref)
+      #print("time=", self.created)
+      #print("lat=", self.lat, self.lat_ref)
+      #print("lon=", self.lon, self.lon_ref)
+      print(self.fname, self.created, str(self.lat)+self.lat_ref, str(self.lon)+self.lon_ref)
 
 if(len(sys.argv) > 1):
    fname = sys.argv[1]
