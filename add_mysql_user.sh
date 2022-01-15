@@ -1,8 +1,12 @@
-username=stock
-password=stock123
-database=stockdb
+# Resolve host windows IP and then interface with mysql DB installed in windows
+username=mdx
+password=mdx123
+database=mdx
 
-mysql -u root -pROOTPASSWORD -e "
+hostip=`cat /etc/resolv.conf | grep nameserver | cut -d ' ' -f 2`
+echo $hostip
+
+mysql -h$hostip -u stock -pstock123 -e "
 CREATE DATABASE IF NOT EXISTS $database DEFAULT CHARACTER SET utf8;
 CREATE USER '$username'@'%' IDENTIFIED BY '$password';
 CREATE USER '$username'@'localhost' IDENTIFIED BY '$password';
